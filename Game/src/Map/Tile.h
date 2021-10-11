@@ -41,7 +41,7 @@ public:
 	const float GetDistance(const Tile* tile) const;
 	const float GetDistance(const Entity* entity) const;
 
-	Collider& GetCollider();
+	Collider& GetCollider() const;
 
 private:
 

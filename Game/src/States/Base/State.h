@@ -2,7 +2,7 @@
 
 #include "../../Graphics/GraphicsSettings.h"
 #include "../../GUI/Resizers.h"
-#include "../../GUI/Button.h"
+#include "../../GUI/DropDownList.h"
 
 class StateData;
 

@@ -16,6 +16,8 @@ Player::Player(sf::Texture& texture, const float x, const float y)
 
 	Entity::CreateEngineComponent(Hitbox, 500.f, 600.f, 200.f);	
 
+	Entity::CreateAttributeComponent(100);
+
 	Entity::SetPosition(x, y);
 
 	InitAnimations();
@@ -69,7 +71,7 @@ const float Player::GetRotation() const
 	return EntitySprite.getRotation();
 }
 
-Collider& Player::GetCollider()
+Collider& Player::GetCollider() const
 {
 	return *PlayerCollider;
 }

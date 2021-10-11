@@ -2,7 +2,7 @@
 
 #include "../../Graphics/GraphicsSettings.h"
 #include "../../GUI/Resizers.h"
-#include "../../GUI/Button.h"
+#include "../../GUI/DropDownList.h"
 
 class StateData;
 
@@ -27,7 +27,7 @@ public:
 
 	void UpdateMousePositions(sf::View* view = nullptr);
 
-	void UpdateSound(const float& dt);
+	void UpdateSound();
 
 	void UpdteMousePositionText();
 
@@ -101,6 +101,7 @@ protected:
 	float KeyTimeMax;
 
 	sf::Clock KeyTimer;	
+	
 
 	// Mouse positions
 	sf::Vector2i MousePositionScreen;

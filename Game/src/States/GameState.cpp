@@ -2,7 +2,7 @@
 #include "GameState.h"
 
 GameState::GameState(StateData* stateData)
-	: State(stateData), Log(typeid(*this).name()), Menu(StData->GfxSettings->Resolution, Font)
+	: State(stateData), Log(typeid(*this).name()), Menu(StData->GfxSettings->Resolution, Font), HpBar(10.f, 10.f, 200.f, 24.f)
 {
 	InitDefferedRenderer();
 
@@ -107,10 +107,12 @@ void GameState::UpdatePlayerInput(const float& dt)
 	//	SoundEngine->PlaySound(sfx::Sound::Covered);
 
 		PlayerOne->Drive(dt);
+		PlayerOne->GainHp(1);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
 		PlayerOne->Reverse(dt);
+		PlayerOne->LoseHp(1);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
@@ -125,7 +127,12 @@ void GameState::UpdatePlayerInput(const float& dt)
 
 void GameState::UpdatePlayerGui(const float& dt)
 {
-
+	HpBar.Update
+	(
+		static_cast<int32>(std::sqrt(std::pow(PlayerOne->GetEngineComponent()->GetVelocity().x, 2) + std::pow(PlayerOne->GetEngineComponent()->GetVelocity().y, 2)) * dt),
+		10,
+		dt
+	);
 }
 
 void GameState::UpdatePauseMenu(const sf::Vector2i& mousePosition, const float& dt)
@@ -173,7 +180,9 @@ void GameState::Update(const float& dt)
 
 		UpdatePlayer(dt);
 
-		UpdateTileMap(dt);		
+		UpdateTileMap(dt);
+
+		UpdatePlayerGui(dt);
 	}
 	else
 	{
@@ -199,6 +208,9 @@ void GameState::Render(sf::RenderTarget* target)
 		RenderTexture.setView(Window->getDefaultView());
 		Menu.Render(&RenderTexture);
 	}
+
+	RenderTexture.setView(Window->getDefaultView());
+	HpBar.Render(&RenderTexture);
 
 	RenderTexture.display();
 
@@ -270,6 +282,7 @@ void GameState::InitPlayers()
 
 void GameState::InitPlayerGui()
 {
+	HpBar.SetFont(Font);
 }
 
 void GameState::InitSystems()

@@ -3,6 +3,7 @@
 #include "Base/State.h"
 #include "../Menus/PauseMenu.h"
 #include "../Map/TileMap.h"
+#include "../GUI/ProgressBar.h"
 
 class GameState : public State
 {
@@ -65,6 +66,8 @@ private:
 	sf::Sprite RenderSprite;
 
 	PauseMenu Menu;
+
+	gui::ProgressBar HpBar;
 
 	enum GameButton : int32
 	{

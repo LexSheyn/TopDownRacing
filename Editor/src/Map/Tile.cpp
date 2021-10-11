@@ -116,7 +116,7 @@ const float Tile::GetDistance(const Entity* entity) const
 	return static_cast<float>(std::sqrt(std::pow((GetCenter().x - entity->GetPosition().x), 2) + std::pow((GetCenter().y - entity->GetPosition().y), 2)));
 }
 
-Collider& Tile::GetCollider()
+Collider& Tile::GetCollider() const
 {
 	return *TileCollider;
 }

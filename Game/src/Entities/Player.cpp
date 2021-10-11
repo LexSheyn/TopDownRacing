@@ -71,7 +71,7 @@ const float Player::GetRotation() const
 	return EntitySprite.getRotation();
 }
 
-Collider& Player::GetCollider()
+Collider& Player::GetCollider() const
 {
 	return *PlayerCollider;
 }

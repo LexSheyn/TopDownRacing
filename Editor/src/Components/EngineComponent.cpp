@@ -93,6 +93,13 @@ const bool EngineComponent::CheckStatus(EngineStatus status) const
 
 void EngineComponent::Update(const float& dt)
 {
+	// Acceleration calculation
+	Acceleration.x = std::sin(Angle * Pi / 180.f) * Boost;
+	Acceleration.y = -std::cos(Angle * Pi / 180.f) * Boost;
+
+	// Velocity calculation
+	Velocity += Acceleration;
+
 	// X
 	if (Velocity.x > 0.f)
 	{
@@ -151,17 +158,11 @@ void EngineComponent::Update(const float& dt)
 		{
 			Velocity.y = 0.f;
 		}
-	}
-
-	// Acceleration calculation
-	Acceleration.x = std::sin(Angle * Pi / 180.f) * Boost;
-	Acceleration.y = -std::cos(Angle * Pi / 180.f) * Boost;
+	}	
 
 	// Resetting boost value
 	Boost = 0.f;
-
-	Velocity += Acceleration;
-
+	
 	// Final move
 	Hitbox.move(Velocity * dt);
 }

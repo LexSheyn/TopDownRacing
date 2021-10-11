@@ -51,7 +51,9 @@ public:
 
 	const sf::FloatRect GetNextPositionBounds(const float& dt) const;
 
-	EngineComponent* GetEngineComponent() const;
+	const EngineComponent* GetEngineComponent() const;
+
+	const AttributeComponent* GetAttributeComponent() const;
 
 	const float GetDistance(const Entity* entity) const;
 

@@ -19,6 +19,7 @@ State::State(StateData* stateData)
 	Ended = false;
 
 	Paused = false;
+	
 
 	InitFont(Font, "../Fonts/slkscr.ttf");
 
@@ -74,9 +75,9 @@ void State::UpdateMousePositions(sf::View* view)
 	Window->setView(Window->getDefaultView());
 }
 
-void State::UpdateSound(const float& dt)
+void State::UpdateSound()
 {
-	// To do..
+	SoundEngine->Update();
 }
 
 void State::UpdteMousePositionText()

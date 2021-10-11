@@ -26,7 +26,7 @@ public:
 
 	const float GetRotation() const;
 
-	Collider& GetCollider();
+	Collider& GetCollider() const;
 
 private:
 

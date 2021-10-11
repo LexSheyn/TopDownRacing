@@ -24,8 +24,6 @@ public:
 
 	const bool IsDead() const;
 
-private:
-
 // Variables:
 
 	int32 HpMax;

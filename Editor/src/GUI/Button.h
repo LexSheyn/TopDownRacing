@@ -1,12 +1,5 @@
 #pragma once
 
-// Statuses
-
-enum class ButtonStatus : int32
-{
-	Idle = 0, Covered, Pressed
-};
-
 namespace gui
 {
 	class Button
@@ -15,7 +8,8 @@ namespace gui
 
 	// Constructors and Destructor:
 
-		Button(const float x, const float y, const float width, const float height, const uint32 id, sf::Texture* texture);
+		Button(const float x, const float y, const float width, const float height, sf::Texture* texture, const uint32 id = 0);
+		Button(const float x, const float y, const float width, const float height, sf::Font& font, const std::string& str, const uint32 id = 0);
 
 		~Button();
 
@@ -29,7 +23,15 @@ namespace gui
 
 		const bool IsPressed() const;
 
+		const std::string GetString() const;
+
 		const uint32& GetId() const;
+
+	// Modifiers:
+
+		void SetString(const std::string& str);
+
+		void SetId(const uint32 id);
 
 	private:
 
@@ -39,9 +41,19 @@ namespace gui
 
 	// Variables:
 
+		// Statuses
+		enum class Status : int32
+		{
+			Idle = 0, Covered, Pressed
+		};
+
 		sf::RectangleShape Shape;
 
-		ButtonStatus ButtonStatus;
+		sf::Font* Font;
+
+		sf::Text Text;
+
+		Status ButtonStatus;
 
 		uint32 Id;
 	};

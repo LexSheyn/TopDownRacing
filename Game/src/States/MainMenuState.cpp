@@ -146,7 +146,7 @@ void MainMenuState::InitGui()
 		gui::PercentToX(43.8f, vm), gui::PercentToY(70.f, vm),
 		static_cast<float>(StData->GfxSettings->Resolution.width) / 9.f,
 		static_cast<float>(StData->GfxSettings->Resolution.height) / 24.f,
-		0u, &ButtonTextures[Start]
+		&ButtonTextures[Start]
 	);
 
 	Buttons[Exit] = new gui::Button
@@ -154,7 +154,15 @@ void MainMenuState::InitGui()
 		gui::PercentToX(43.8f, vm), gui::PercentToY(78.f, vm),
 		static_cast<float>(StData->GfxSettings->Resolution.width) / 9.f,
 		static_cast<float>(StData->GfxSettings->Resolution.height) / 24.f,
-		1u, &ButtonTextures[Exit]
+		&ButtonTextures[Exit]
+	);
+
+	Buttons[Settings] = new gui::Button
+	(
+		gui::PercentToX(73.8f, vm), gui::PercentToY(78.f, vm),
+		static_cast<float>(StData->GfxSettings->Resolution.width) / 9.f,
+		static_cast<float>(StData->GfxSettings->Resolution.height) / 24.f,
+		Font, "Test"
 	);
 }
 

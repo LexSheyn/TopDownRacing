@@ -112,6 +112,7 @@
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Graphics\GraphicsSettings.cpp" />
     <ClCompile Include="src\GUI\Button.cpp" />
+    <ClCompile Include="src\GUI\DropDownList.cpp" />
     <ClCompile Include="src\GUI\ProgressBar.cpp" />
     <ClCompile Include="src\GUI\Resizers.cpp" />
     <ClCompile Include="src\Logger\Logger.cpp" />
@@ -122,6 +123,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\Menus\PauseMenu.cpp" />
+    <ClCompile Include="src\Menus\SettingsMenu.cpp" />
     <ClCompile Include="src\Sound\SoundEngine.cpp" />
     <ClCompile Include="src\States\GameState.cpp" />
     <ClCompile Include="src\States\MainMenuState.cpp" />
@@ -150,6 +152,7 @@
     <ClInclude Include="src\Game\Game.h" />
     <ClInclude Include="src\Graphics\GraphicsSettings.h" />
     <ClInclude Include="src\GUI\Button.h" />
+    <ClInclude Include="src\GUI\DropDownList.h" />
     <ClInclude Include="src\GUI\ProgressBar.h" />
     <ClInclude Include="src\GUI\Resizers.h" />
     <ClInclude Include="src\Integer.h" />
@@ -158,6 +161,7 @@
     <ClInclude Include="src\Map\TileMap.h" />
     <ClInclude Include="src\Menus\Base\Menu.h" />
     <ClInclude Include="src\Menus\PauseMenu.h" />
+    <ClInclude Include="src\Menus\SettingsMenu.h" />
     <ClInclude Include="src\Sound\SoundEngine.h" />
     <ClInclude Include="src\States\GameState.h" />
     <ClInclude Include="src\States\MainMenuState.h" />

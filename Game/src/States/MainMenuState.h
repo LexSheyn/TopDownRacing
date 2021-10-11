@@ -54,6 +54,8 @@ private:
 		Start = 0, Settings, Exit
 	};
 
+	gui::DropDownList List;
+
 	std::map<const ButtonName, gui::Button*> Buttons;
 	std::map<const ButtonName, sf::Texture> ButtonTextures;
 };

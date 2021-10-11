@@ -5,7 +5,7 @@ namespace gui
 {
 // Constructors and Destructor:
 
-	gui::Button::Button(const float x, const float y, const float width, const float height, const uint32 id, sf::Texture* texture)
+	gui::Button::Button(const float x, const float y, const float width, const float height, sf::Texture* texture, const uint32 id)
 	{
 		InitVariables();
 
@@ -16,6 +16,24 @@ namespace gui
 		{
 			Shape.setTexture(texture);
 		}
+
+		Id = id;
+	}
+
+	Button::Button(const float x, const float y, const float width, const float height, sf::Font& font, const std::string& str, const uint32 id)
+	{
+		InitVariables();
+
+		Shape.setPosition(x, y);
+		Shape.setSize(sf::Vector2f(width, height));
+		Shape.setOutlineThickness(-1.f);
+
+		Font = &font;
+
+		Text.setFont(*Font);
+		Text.setCharacterSize(static_cast<uint32>(Shape.getSize().y / 1.5f));
+		Text.setString(str);
+		Text.setPosition((Shape.getPosition().x + (Shape.getGlobalBounds().width / 2.f)) - (Text.getGlobalBounds().width / 1.75f), Shape.getPosition().y + (Shape.getGlobalBounds().height / 20.f));
 
 		Id = id;
 	}
@@ -32,37 +50,61 @@ namespace gui
 	{
 		if (Shape.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 		{
-			ButtonStatus = ButtonStatus::Covered;
+			ButtonStatus = Status::Covered;
 
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 			{
-				ButtonStatus = ButtonStatus::Pressed;
+				ButtonStatus = Status::Pressed;
 			}
 		}
 		else
 		{
-			ButtonStatus = ButtonStatus::Idle;
+			ButtonStatus = Status::Idle;
 		}
 
 		switch (ButtonStatus)
 		{
-			case ButtonStatus::Idle:
-			{
-				Shape.setFillColor(sf::Color(150, 50, 50));
+			case Status::Idle:
+			{				
+				if (Font)
+				{					
+					Text.setFillColor(sf::Color(250, 50, 50));
+					Shape.setOutlineColor(sf::Color(250, 50, 50));
+					Shape.setFillColor(sf::Color(100, 50, 50));
+				}
+				else
+				{
+					Shape.setFillColor(sf::Color(150, 50, 50));
+				}
 
 				break;
 			}			
 
-			case ButtonStatus::Covered:
+			case Status::Covered:
 			{
 				Shape.setFillColor(sf::Color(250, 50, 50));
+				
+				if (Font)
+				{
+					Text.setFillColor(sf::Color(50, 50, 50));
+					Shape.setOutlineColor(sf::Color(150, 50, 50));
+				}
 
 				break;
 			}			
 
-			case ButtonStatus::Pressed:
-			{
-				Shape.setFillColor(sf::Color(100, 50, 50));
+			case Status::Pressed:
+			{				
+				if (Font)
+				{
+					Text.setFillColor(sf::Color(250, 250, 250));
+					Shape.setOutlineColor(sf::Color(200, 50, 50));
+					Shape.setFillColor(sf::Color(150, 50, 50));
+				}
+				else
+				{
+					Shape.setFillColor(sf::Color(100, 50, 50));
+				}
 
 				break;
 			}
@@ -72,6 +114,11 @@ namespace gui
 	void Button::Render(sf::RenderTarget* target)
 	{
 		target->draw(Shape);
+		
+		if (Font)
+		{
+			target->draw(Text);
+		}
 	}
 
 
@@ -79,12 +126,17 @@ namespace gui
 
 	const bool Button::IsPressed() const
 	{
-		if (ButtonStatus == ButtonStatus::Pressed)
+		if (ButtonStatus == Status::Pressed)
 		{
 			return true;
 		}
 
 		return false;
+	}
+
+	const std::string Button::GetString() const
+	{
+		return Text.getString();
 	}
 
 	const uint32& Button::GetId() const
@@ -93,11 +145,26 @@ namespace gui
 	}
 
 
+// Modifiers:
+
+	void Button::SetString(const std::string& str)
+	{
+		Text.setString(str);
+	}
+
+	void Button::SetId(const uint32 id)
+	{
+		Id = id;
+	}
+
+
 // Private Functions:
 
 	void Button::InitVariables()
 	{
-		ButtonStatus = ButtonStatus::Idle;
+		Font = nullptr;
+
+		ButtonStatus = Status::Idle;
 
 		Id = 0;
 	}
