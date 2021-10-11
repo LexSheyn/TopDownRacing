@@ -76,8 +76,8 @@ void Menu::AddButton(const int32 index, const int32 position, sf::Texture* textu
 				Container.getPosition().y + Container.getSize().y / 5.f + buttonHeight * 1.5f * static_cast<float>(position),
 				buttonWidth, 
 				buttonHeight,
-				static_cast<uint32>(position), 
-				texture
+				texture,
+				static_cast<uint32>(position)
 			);
 
 			ButtonPtr[position] = Buttons[index];

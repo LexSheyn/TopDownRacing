@@ -107,7 +107,9 @@
     </ClCompile>
     <ClCompile Include="src\EditorModes\MapEditorMode.cpp" />
     <ClCompile Include="src\Editor\Editor.cpp" />
-    <ClCompile Include="src\Entities\Base\Entity.cpp" />
+    <ClCompile Include="src\Entities\Base\Entity.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\Entities\Player.cpp" />
     <ClCompile Include="src\EntryPoint.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">stdafx.h</PrecompiledHeaderFile>
@@ -124,7 +126,9 @@
     </ClCompile>
     <ClCompile Include="src\Map\Tile.cpp" />
     <ClCompile Include="src\Map\TileMap.cpp" />
-    <ClCompile Include="src\Menus\Base\Menu.cpp" />
+    <ClCompile Include="src\Menus\Base\Menu.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\Menus\PauseMenu.cpp" />
     <ClCompile Include="src\Menus\SettingsMenu.cpp" />
     <ClCompile Include="src\Sound\SoundEngine.cpp" />

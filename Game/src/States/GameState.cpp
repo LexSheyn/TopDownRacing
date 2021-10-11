@@ -2,7 +2,10 @@
 #include "GameState.h"
 
 GameState::GameState(StateData* stateData)
-	: State(stateData), Log(typeid(*this).name()), Menu(StData->GfxSettings->Resolution, Font), HpBar(10.f, 10.f, 200.f, 24.f)
+	: State(stateData), Log(typeid(*this).name()), 
+	Menu(StData->GfxSettings->Resolution, Font), 
+	MenuSettings(StData->Window, StData->GfxSettings, Font), 
+	HpBar(10.f, 10.f, 200.f, 24.f)
 {
 	InitDefferedRenderer();
 
@@ -17,7 +20,7 @@ GameState::GameState(StateData* stateData)
 
 	InitTileMap();
 
-	InitPauseMenu();
+	InitMenus();
 
 	InitPlayers();
 
@@ -93,6 +96,10 @@ void GameState::UpdateInput(const float& dt)
 		{
 			State::PauseState();
 		}
+		else if (MenuSettings.IsOpen())
+		{
+			MenuSettings.Close();			
+		}
 		else
 		{
 			State::UnpauseState();
@@ -135,7 +142,7 @@ void GameState::UpdatePlayerGui(const float& dt)
 	);
 }
 
-void GameState::UpdatePauseMenu(const sf::Vector2i& mousePosition, const float& dt)
+void GameState::UpdateMenus(const sf::Vector2i& mousePosition, const float& dt)
 {
 	Menu.Update(mousePosition, dt);
 
@@ -147,12 +154,23 @@ void GameState::UpdatePauseMenu(const sf::Vector2i& mousePosition, const float& 
 	else if (Menu.IsButtonPressed(Settings) && GetKeyTime())
 	{
 		SoundEngine->PlaySound(sfx::Sound::Positive);
+		
+		if (!MenuSettings.IsOpen())
+		{
+			MenuSettings.Open();
+		}
+		else
+		{
+			MenuSettings.Close();
+		}
 	}
 	else if (Menu.IsButtonPressed(Exit) && GetKeyTime())
 	{
 		SoundEngine->PlaySound(sfx::Sound::Negative);
 		State::EndState();
 	}
+
+	MenuSettings.Update(mousePosition, dt);
 }
 
 void GameState::UpdateTileMap(const float& dt)
@@ -186,7 +204,7 @@ void GameState::Update(const float& dt)
 	}
 	else
 	{
-		UpdatePauseMenu(MousePositionWindow, dt);
+		UpdateMenus(MousePositionWindow, dt);
 	}
 
 	State::UpdateSound();
@@ -207,6 +225,7 @@ void GameState::Render(sf::RenderTarget* target)
 	{
 		RenderTexture.setView(Window->getDefaultView());
 		Menu.Render(&RenderTexture);
+		MenuSettings.Render(&RenderTexture);
 	}
 
 	RenderTexture.setView(Window->getDefaultView());
@@ -268,7 +287,7 @@ void GameState::InitTileMap()
 	Map = new TileMap("../Maps/map.tilemap");
 }
 
-void GameState::InitPauseMenu()
+void GameState::InitMenus()
 {
 	Menu.AddButton(Resume, 0, &ButtonTextures[Resume]);
 	Menu.AddButton(Settings, 2, &ButtonTextures[Settings]);

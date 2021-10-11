@@ -2,6 +2,7 @@
 
 #include "Base/State.h"
 #include "../Menus/PauseMenu.h"
+#include "../Menus/SettingsMenu.h"
 #include "../Map/TileMap.h"
 #include "../GUI/ProgressBar.h"
 
@@ -25,7 +26,7 @@ public:
 
 	void UpdatePlayerGui(const float& dt);
 
-	void UpdatePauseMenu(const sf::Vector2i& mousePosition, const float& dt);
+	void UpdateMenus(const sf::Vector2i& mousePosition, const float& dt);
 
 	void UpdateTileMap(const float& dt);
 
@@ -45,7 +46,7 @@ private:
 
 	void InitTileMap();
 
-	void InitPauseMenu();
+	void InitMenus();
 
 	void InitPlayers();
 
@@ -66,6 +67,8 @@ private:
 	sf::Sprite RenderSprite;
 
 	PauseMenu Menu;
+
+	SettingsMenu MenuSettings;
 
 	gui::ProgressBar HpBar;
 

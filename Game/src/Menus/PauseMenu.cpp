@@ -6,7 +6,12 @@
 PauseMenu::PauseMenu(sf::VideoMode videoMode, sf::Font& font)
 	: Menu(videoMode, font)
 {
-	//
+	MenuText.setString("Pause");
+	MenuText.setPosition
+	(
+		(Container.getPosition().x + (Container.getSize().x / 2.f)) - (MenuText.getGlobalBounds().width / 2.f),
+		Container.getPosition().y + (MenuText.getGlobalBounds().height * 2.f)
+	);
 }
 
 PauseMenu::~PauseMenu()
