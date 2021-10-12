@@ -109,6 +109,8 @@ namespace gui
 				break;
 			}
 		}
+
+		Text.setPosition((Shape.getPosition().x + (Shape.getGlobalBounds().width / 2.f)) - (Text.getGlobalBounds().width / 1.85f), Shape.getPosition().y + (Shape.getGlobalBounds().height / 20.f));
 	}
 
 	void Button::Render(sf::RenderTarget* target)

@@ -230,9 +230,10 @@ void State::InitMousePositionText()
 void State::InitFpsCounter()
 {
 	FpsCounterText.setFont(Font);
-	FpsCounterText.setCharacterSize(20);
-//	FpsCounterText.setPosition
-//	(
-//
-//	);
+	FpsCounterText.setCharacterSize(gui::CalculateCharSize(3.f, StData->GfxSettings->Resolution));
+	FpsCounterText.setPosition
+	(
+		static_cast<float>(StData->GfxSettings->Resolution.width) * 0.9f,
+		0.f
+	);
 }

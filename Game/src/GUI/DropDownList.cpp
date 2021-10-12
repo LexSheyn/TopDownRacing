@@ -52,6 +52,11 @@ namespace gui
 
 		for (uint32 i = 0; i < numberOfElements; i++)
 		{
+			if (list[i] == StrWidth + " x " + StrHeight)
+			{
+				ActiveElement->SetId(i);
+			}
+
 			List.push_back
 			(
 				new gui::Button
@@ -59,7 +64,7 @@ namespace gui
 					x, y + (static_cast<float>(i + 1u) * height), width, height,
 					Font, list[i], i
 				)
-			);
+			);			
 		}
 	}
 	

@@ -19,6 +19,13 @@ public:
 
 	void Close();
 
+	// Positions available from left to right: 0 - 2.
+	void AddButton(const uint32 index, const uint32 position, sf::Texture* texture);	
+
+	void ResetWindow();
+
+	void ResetGui() override;
+
 	void Update(const sf::Vector2i& mousePosition, const float& dt) override;
 
 	void Render(sf::RenderTarget* target) override;
@@ -31,9 +38,26 @@ private:
 
 // Private Functions:
 
+	void InitVariables();
+
 	void InitVideoModes();
 
+	void InitGui();
+
 // Variables:
+
+	Logger Log;
+
+	static const uint32 ButtonsAmount = 3u;
+
+	gui::Button* ButtonPtr[ButtonsAmount];
+	uint32 ButtonPtrSize;
+
+	uint32 ButtonIndex[ButtonsAmount];
+	uint32 ButtonIndexSize;
+
+	sf::Texture* ButtonTexture[ButtonsAmount];
+	uint32 ButtonTextureSize;
 
 	enum Setting : uint32
 	{
@@ -46,7 +70,7 @@ private:
 
 	sf::Text SettingsText[6];
 
-	gui::DropDownList* ResolutionList;
+	std::map<uint32, gui::DropDownList*> SettingsList;
 
 	std::vector<sf::VideoMode> VideoMode;
 	std::vector<std::string> VideoModeString;

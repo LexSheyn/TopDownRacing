@@ -58,5 +58,8 @@ private:
 
 	std::map<const ButtonName, gui::Button*> Buttons;
 	std::map<const ButtonName, sf::Texture> ButtonTextures;
+
+	// Reset GUI
+	bool GuiReset;
 };
 

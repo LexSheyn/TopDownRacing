@@ -12,7 +12,7 @@ public:
 
 // Constructors and Destructors:
 
-	GameState(StateData* stateData);
+	GameState(StateData* stateData, bool* guiReset);
 
 	~GameState();
 
@@ -66,19 +66,22 @@ private:
 	sf::RenderTexture RenderTexture;
 	sf::Sprite RenderSprite;
 
-	PauseMenu Menu;
+	PauseMenu MenuPause;
 
 	SettingsMenu MenuSettings;
 
 	gui::ProgressBar HpBar;
 
-	enum GameButton : int32
+	enum GameButton : uint32
 	{
-		Resume = 0, Settings, Exit
+		Resume = 0, Settings, Exit, Apply, Back
 	};
 
 	TileMap* Map;
 
 	Player* PlayerOne;
+
+	// Reset GUI
+	bool* GuiReset;
 };
 

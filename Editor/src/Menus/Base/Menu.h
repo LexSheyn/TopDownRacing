@@ -6,34 +6,34 @@ class Menu
 {
 public:
 
-// Constructors and Destructor:
+	// Constructors and Destructor:
 
 	Menu(sf::VideoMode& videoMode, sf::Font& font);
 
 	virtual ~Menu();
 
-// Functions:
+	// Functions:
 
-	// Positions available from top to bottom: 0 - 7.
-	void AddButton(const int32 index, const int32 position, sf::Texture* texture);
+		// Pure virtual
+	virtual void ResetGui() = 0;
 
 	// Pure virtual
 	virtual void Update(const sf::Vector2i& mousePosition, const float& dt) = 0;
-	
+
 	// Pure virtual
 	virtual void Render(sf::RenderTarget* target) = 0;
 
-// Accessors:
+	// Accessors:
 
-	const bool IsButtonPressed(const int32 index);
+	const bool IsButtonPressed(const uint32 index);
 
 protected:
 
-// Protected Functions:
+	// Protected Functions:
 
 	void InitTexture(sf::Texture& texture, const std::string& filePath);
 
-// Variables:
+	// Variables:
 
 	sf::Font& Font;
 	sf::Text MenuText;
@@ -44,17 +44,11 @@ protected:
 	sf::Texture LogoTexture;
 	sf::Sprite LogoSprite;
 
-	std::map<const int32, gui::Button*> Buttons;
-	gui::Button* ButtonPtr[8];
-	int32 ButtonPtrSize;
+	std::map<uint32, gui::Button*> Buttons;
 
 private:
 
-// Private Functions:
-
-	void InitVariables();
-
-// Variables:
+	// Variables:
 
 	Logger Log;
 };

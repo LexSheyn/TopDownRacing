@@ -22,6 +22,9 @@ MainMenuState::MainMenuState(StateData* stateData)
 	InitSound();
 
 	Log.Trace("Main menu initialized");
+
+	// Reset GUI
+	GuiReset = false;
 }
 
 MainMenuState::~MainMenuState()
@@ -43,7 +46,7 @@ void MainMenuState::UpdateInput(const float& dt)
 	if (Buttons[Start]->IsPressed() && State::GetKeyTime())
 	{
 		SoundEngine->PlaySound(sfx::Sound::Positive);
-		States->push(new GameState(StData));
+		States->push(new GameState(StData, &GuiReset));
 	}
 	else if (Buttons[Exit]->IsPressed() && State::GetKeyTime())
 	{
@@ -62,6 +65,14 @@ void MainMenuState::UpdateButtons(const float& dt)
 
 void MainMenuState::Update(const float& dt)
 {
+	// Reset GUI
+	if (GuiReset)
+	{
+		ResetGui();
+
+		GuiReset = false;
+	}
+
 	State::UpdateMousePositions();
 
 	UpdateButtons(dt);
@@ -173,4 +184,6 @@ void MainMenuState::ResetGui()
 	}
 
 	InitGui();
+
+	State::InitFpsCounter();
 }
