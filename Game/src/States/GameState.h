@@ -12,11 +12,13 @@ public:
 
 // Constructors and Destructors:
 
-	GameState(StateData* stateData, bool* guiReset);
+	GameState(StateData* stateData, State* mainMenu);
 
 	~GameState();
 
 // Functions:
+
+	void ResetGui() override {}
 
 	void UpdateView(const float& dt);
 
@@ -82,6 +84,6 @@ private:
 	Player* PlayerOne;
 
 	// Reset GUI
-	bool* GuiReset;
+	State* MainMenuPtr;
 };
 

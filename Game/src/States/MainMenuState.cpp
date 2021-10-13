@@ -22,9 +22,6 @@ MainMenuState::MainMenuState(StateData* stateData)
 	InitSound();
 
 	Log.Trace("Main menu initialized");
-
-	// Reset GUI
-	GuiReset = false;
 }
 
 MainMenuState::~MainMenuState()
@@ -41,12 +38,24 @@ MainMenuState::~MainMenuState()
 
 // Functions:
 
+void MainMenuState::ResetGui()
+{
+	for (auto& button : Buttons)
+	{
+		delete button.second;
+	}
+
+	InitGui();
+
+	State::InitFpsCounter();
+}
+
 void MainMenuState::UpdateInput(const float& dt)
 {
 	if (Buttons[Start]->IsPressed() && State::GetKeyTime())
 	{
 		SoundEngine->PlaySound(sfx::Sound::Positive);
-		States->push(new GameState(StData, &GuiReset));
+		States->push(new GameState(StData, this));
 	}
 	else if (Buttons[Exit]->IsPressed() && State::GetKeyTime())
 	{
@@ -65,14 +74,6 @@ void MainMenuState::UpdateButtons(const float& dt)
 
 void MainMenuState::Update(const float& dt)
 {
-	// Reset GUI
-	if (GuiReset)
-	{
-		ResetGui();
-
-		GuiReset = false;
-	}
-
 	State::UpdateMousePositions();
 
 	UpdateButtons(dt);
@@ -174,16 +175,4 @@ void MainMenuState::InitSound()
 	SoundEngine->InitSound(sfx::Sound::Positive, "../Resources/Sounds/Buttons/positive.mp3");
 	SoundEngine->InitSound(sfx::Sound::Covered, "../Resources/Sounds/Buttons/covered.mp3");
 	SoundEngine->InitSound(sfx::Sound::Negative, "../Resources/Sounds/Buttons/negative.mp3");
-}
-
-void MainMenuState::ResetGui()
-{
-	for (auto& button : Buttons)
-	{
-		delete button.second;
-	}
-
-	InitGui();
-
-	State::InitFpsCounter();
 }

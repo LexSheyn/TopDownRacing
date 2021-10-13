@@ -19,6 +19,9 @@ public:
 
 // Functions:
 
+	// Pure virtual
+	virtual void ResetGui() = 0;
+
 	void EndState();
 	
 	void PauseState();

@@ -14,6 +14,8 @@ public:
 
 // Functions:
 
+	void ResetGui() override;
+
 	void UpdateInput(const float& dt) override;
 
 	void UpdateButtons(const float& dt);
@@ -36,8 +38,6 @@ private:
 
 	void InitSound() override;
 
-	void ResetGui();
-
 // Variables:
 
 	// Logger
@@ -58,8 +58,5 @@ private:
 
 	std::map<const ButtonName, gui::Button*> Buttons;
 	std::map<const ButtonName, sf::Texture> ButtonTextures;
-
-	// Reset GUI
-	bool GuiReset;
 };
 

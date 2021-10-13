@@ -1,8 +1,8 @@
 #include "../stdafx.h"
 #include "GameState.h"
 
-GameState::GameState(StateData* stateData, bool* guiReset)
-	: State(stateData), Log(typeid(*this).name()), 
+GameState::GameState(StateData* stateData, State* mainMenu)
+	: State(stateData), MainMenuPtr(mainMenu), Log(typeid(*this).name()),
 	MenuPause(StData->GfxSettings->Resolution, Font),
 	MenuSettings(StData->Window, StData->GfxSettings, Font), 
 	HpBar(10.f, 10.f, 200.f, 24.f)
@@ -29,9 +29,6 @@ GameState::GameState(StateData* stateData, bool* guiReset)
 	InitSystems();
 
 	InitSound();
-
-	// Reset GUI
-	GuiReset = guiReset;
 }
 
 GameState::~GameState()
@@ -170,9 +167,6 @@ void GameState::UpdateMenus(const sf::Vector2i& mousePosition, const float& dt)
 	{
 		SoundEngine->PlaySound(sfx::Sound::Negative);
 
-		// Reset GUI
-		*GuiReset = true;
-
 		State::EndState();
 	}
 
@@ -182,6 +176,7 @@ void GameState::UpdateMenus(const sf::Vector2i& mousePosition, const float& dt)
 	{
 		if (MenuSettings.IsButtonPressed(Apply) && GetKeyTime())
 		{
+			// Reset GUI
 			MenuSettings.ResetWindow();
 			MenuSettings.ResetGui();
 
@@ -192,6 +187,9 @@ void GameState::UpdateMenus(const sf::Vector2i& mousePosition, const float& dt)
 			InitDefferedRenderer();
 			InitView();
 			UpdateView(dt);
+
+			// Reset Main menu GUI
+			MainMenuPtr->ResetGui();
 		}
 		else if (MenuSettings.IsButtonPressed(Back) && GetKeyTime())
 		{

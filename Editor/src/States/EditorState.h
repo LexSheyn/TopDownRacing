@@ -24,6 +24,9 @@ public:
 
 // Functions:
 
+	// Pure virtual
+	void ResetGui() override {}
+
 	void ZoomIn(const float& dt);
 
 	void ZoomOut(const float& dt);
