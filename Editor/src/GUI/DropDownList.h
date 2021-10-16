@@ -13,12 +13,15 @@ namespace gui
 		DropDownList
 		(
 			const float x, const float y, const float width, const float height,
+			sf::Clock& keyTimer, float& keyTimeMax,
+			std::string defaultString,
 			sf::Font& font, std::string list[],
 			uint32 numberOfElements, uint32 defaultIndex = 0
 		);
 		DropDownList
 		(
 			const float x, const float y, const float width, const float height,
+			sf::Clock& keyTimer, float& keyTimeMax,
 			sf::VideoMode videoMode,
 			sf::Font& font, std::string list[],
 			uint32 numberOfElements, uint32 defaultIndex = 0
@@ -42,9 +45,9 @@ namespace gui
 
 	// Variables:
 
-		sf::Clock KeyTimer;
+		sf::Clock& KeyTimer;
 
-		float KeyTimeMax;
+		float& KeyTimeMax;
 
 		sf::Font& Font;
 

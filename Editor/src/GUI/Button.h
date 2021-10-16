@@ -44,7 +44,7 @@ namespace gui
 		// Statuses
 		enum class Status : int32
 		{
-			Idle = 0, Covered, Pressed
+			IDLE = 0, COVERED, PRESSED
 		};
 
 		sf::RectangleShape Shape;

@@ -4,7 +4,7 @@
 GameState::GameState(StateData* stateData, State* mainMenu)
 	: State(stateData), MainMenuPtr(mainMenu), Log(typeid(*this).name()),
 	MenuPause(StData->GfxSettings->Resolution, Font),
-	MenuSettings(StData->Window, StData->GfxSettings, Font), 
+	MenuSettings(StData->Window, StData->GfxSettings, Font, KeyTimer, KeyTimeMax), 
 	HpBar(10.f, 10.f, 200.f, 24.f)
 {
 	InitDefferedRenderer();
@@ -14,11 +14,11 @@ GameState::GameState(StateData* stateData, State* mainMenu)
 	State::InitKeybinds("../Config/gamestate_keybinds.ini");
 
 	State::InitTexture(PlayerTexture, "../Resources/Images/Sprites/Player/ship.png");
-	State::InitTexture(ButtonTextures[Resume], "../Resources/Images/GUI/Buttons/resume.png");
-	State::InitTexture(ButtonTextures[Settings], "../Resources/Images/GUI/Buttons/settings.png");
-	State::InitTexture(ButtonTextures[Exit], "../Resources/Images/GUI/Buttons/exit.png");
-	State::InitTexture(ButtonTextures[Apply], "../Resources/Images/GUI/Buttons/apply.png");
-	State::InitTexture(ButtonTextures[Back], "../Resources/Images/GUI/Buttons/back.png");
+	State::InitTexture(ButtonTextures[RESUME], "../Resources/Images/GUI/Buttons/resume.png");
+	State::InitTexture(ButtonTextures[SETTINGS], "../Resources/Images/GUI/Buttons/settings.png");
+	State::InitTexture(ButtonTextures[EXIT], "../Resources/Images/GUI/Buttons/exit.png");
+	State::InitTexture(ButtonTextures[APPLY], "../Resources/Images/GUI/Buttons/apply.png");
+	State::InitTexture(ButtonTextures[BACK], "../Resources/Images/GUI/Buttons/back.png");
 
 	InitTileMap();
 
@@ -147,12 +147,19 @@ void GameState::UpdatePlayerGui(const float& dt)
 
 void GameState::UpdateMenus(const sf::Vector2i& mousePosition, const float& dt)
 {
-	if (MenuPause.IsButtonPressed(Resume) && GetKeyTime())
+	if (MenuPause.IsButtonPressed(RESUME) && GetKeyTime())
 	{
 		SoundEngine->PlaySound(sfx::Sound::Positive);
+				
+		if (MenuSettings.IsOpen())
+		{
+			MenuSettings.Close();
+			MenuSettings.ResetGui();
+		}
+
 		State::UnpauseState();
 	}
-	else if (MenuPause.IsButtonPressed(Settings) && GetKeyTime())
+	else if (MenuPause.IsButtonPressed(SETTINGS) && GetKeyTime())
 	{
 		SoundEngine->PlaySound(sfx::Sound::Positive);
 		
@@ -166,7 +173,7 @@ void GameState::UpdateMenus(const sf::Vector2i& mousePosition, const float& dt)
 			MenuSettings.ResetGui();
 		}
 	}
-	else if (MenuPause.IsButtonPressed(Exit) && GetKeyTime())
+	else if (MenuPause.IsButtonPressed(EXIT) && GetKeyTime())
 	{
 		SoundEngine->PlaySound(sfx::Sound::Negative);
 
@@ -177,7 +184,7 @@ void GameState::UpdateMenus(const sf::Vector2i& mousePosition, const float& dt)
 	
 	if (MenuSettings.IsOpen())
 	{
-		if (MenuSettings.IsButtonPressed(Apply) && GetKeyTime())
+		if (MenuSettings.IsButtonPressed(APPLY) && GetKeyTime())
 		{
 			// Reset GUI
 			MenuSettings.ResetWindow();
@@ -194,7 +201,7 @@ void GameState::UpdateMenus(const sf::Vector2i& mousePosition, const float& dt)
 			// Reset Main menu GUI
 			MainMenuPtr->ResetGui();
 		}
-		else if (MenuSettings.IsButtonPressed(Back) && GetKeyTime())
+		else if (MenuSettings.IsButtonPressed(BACK) && GetKeyTime())
 		{
 			MenuSettings.Close();
 			MenuSettings.ResetGui();
@@ -327,13 +334,13 @@ void GameState::InitTileMap()
 void GameState::InitMenus()
 {
 	// Pause menu
-	MenuPause.AddButton(Resume, 0, &ButtonTextures[Resume]);
-	MenuPause.AddButton(Settings, 2, &ButtonTextures[Settings]);
-	MenuPause.AddButton(Exit, 4, &ButtonTextures[Exit]);
+	MenuPause.AddButton(RESUME, 0, &ButtonTextures[RESUME]);
+	MenuPause.AddButton(SETTINGS, 2, &ButtonTextures[SETTINGS]);
+	MenuPause.AddButton(EXIT, 4, &ButtonTextures[EXIT]);
 
 	// Settings menu
-	MenuSettings.AddButton(Apply, 2, &ButtonTextures[Apply]);
-	MenuSettings.AddButton(Back, 0, &ButtonTextures[Back]);
+	MenuSettings.AddButton(APPLY, 2, &ButtonTextures[APPLY]);
+	MenuSettings.AddButton(BACK, 0, &ButtonTextures[BACK]);
 }
 
 void GameState::InitPlayers()

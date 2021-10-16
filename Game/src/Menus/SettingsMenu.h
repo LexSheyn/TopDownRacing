@@ -9,7 +9,7 @@ public:
 
 // Constructors and Destructor:
 
-	SettingsMenu(sf::RenderWindow* window, GraphicsSettings* graphicsSettings, sf::Font& font);
+	SettingsMenu(sf::RenderWindow* window, GraphicsSettings* graphicsSettings, sf::Font& font, sf::Clock& keyTimer, float& keyTimeMax);
 
 	~SettingsMenu();
 
@@ -69,6 +69,10 @@ private:
 	sf::RenderWindow* Window;
 
 	GraphicsSettings* GfxSettings;
+
+	sf::Clock& KeyTimer;
+
+	float& KeyTimeMax;
 
 	// Settings
 	static const uint32 SettingsAmount = 6u;

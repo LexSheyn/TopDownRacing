@@ -14,7 +14,7 @@ GraphicsSettings::GraphicsSettings()
 
 	Style = sf::Style::Titlebar | sf::Style::Close;
 
-	FrameRateLimit = 30;
+	FramerateLimit = 30;
 
 	VerticalSync = false;
 
@@ -45,7 +45,7 @@ bool GraphicsSettings::Save(const std::string& filePath)
 		out << Title << std::endl;
 		out << Resolution.width << " " << Resolution.height << std::endl;
 		out << Fullscreen << std::endl;
-		out << FrameRateLimit << std::endl;
+		out << FramerateLimit << std::endl;
 		out << VerticalSync << std::endl;
 		out << ContextSettings.antialiasingLevel << std::endl;
 		out << CursorGrabbing << std::endl;
@@ -75,7 +75,7 @@ bool GraphicsSettings::Load(const std::string& filePath)
 		std::getline(in, Title);
 		in >> Resolution.width >> Resolution.height;
 		in >> Fullscreen;
-		in >> FrameRateLimit;
+		in >> FramerateLimit;
 		in >> VerticalSync;
 		in >> ContextSettings.antialiasingLevel;
 		in >> CursorGrabbing;

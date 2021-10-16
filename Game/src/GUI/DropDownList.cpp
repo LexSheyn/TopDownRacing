@@ -8,10 +8,11 @@ namespace gui
 	DropDownList::DropDownList
 	(
 		const float x, const float y, const float width, const float height,
+		sf::Clock& keyTimer, float& keyTimeMax,
 		std::string defaultString,
 		sf::Font& font, std::string list[],
 		uint32 numberOfElements, uint32 defaultIndex
-	) : Font(font), Showed(false), KeyTimeMax(0.3f)
+	) : Font(font), Showed(false), KeyTimer(keyTimer), KeyTimeMax(keyTimeMax)
 	{
 		ActiveElement = new gui::Button
 		(
@@ -41,11 +42,12 @@ namespace gui
 
 	DropDownList::DropDownList
 	(
-		const float x, const float y, const float width, const float height, 
+		const float x, const float y, const float width, const float height,
+		sf::Clock& keyTimer, float& keyTimeMax,
 		sf::VideoMode videoMode, 
 		sf::Font& font, std::string list[], 
 		uint32 numberOfElements, uint32 defaultIndex
-	) : Font(font), Showed(false), KeyTimeMax(0.3f)
+	) : Font(font), Showed(false), KeyTimer(keyTimer), KeyTimeMax(keyTimeMax)
 	{
 		ActiveElement = new gui::Button
 		(

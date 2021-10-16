@@ -3,8 +3,8 @@
 
 // Constructors and Destructor:
 
-SettingsMenu::SettingsMenu(sf::RenderWindow* window, GraphicsSettings* graphicsSettings, sf::Font& font)
-	: Menu(graphicsSettings->Resolution, font), Window(window), GfxSettings(graphicsSettings), Opened(false), Log(typeid(*this).name())
+SettingsMenu::SettingsMenu(sf::RenderWindow* window, GraphicsSettings* graphicsSettings, sf::Font& font, sf::Clock& keyTimer, float& keyTimeMax)
+	: Menu(graphicsSettings->Resolution, font), Window(window), GfxSettings(graphicsSettings), Opened(false), KeyTimer(keyTimer), KeyTimeMax(keyTimeMax), Log(typeid(*this).name())
 {
 	InitVariables();
 
@@ -299,6 +299,7 @@ void SettingsMenu::InitGui()
 	(
 		SettingsText[RESOLUTION].getPosition().x + (Container.getSize().x / 12.f * 4.f), SettingsText[RESOLUTION].getPosition().y,
 		gui::PercentToX(13.f, GfxSettings->Resolution), gui::PercentToY(4.0f, GfxSettings->Resolution),
+		KeyTimer, KeyTimeMax,
 		GfxSettings->Resolution, Font,
 		Option[RESOLUTION].data(), static_cast<uint32>(Option[RESOLUTION].size())
 	);
@@ -308,6 +309,7 @@ void SettingsMenu::InitGui()
 	(
 		SettingsText[FULLSCREEN].getPosition().x + (Container.getSize().x / 12.f * 4.f), SettingsText[FULLSCREEN].getPosition().y,
 		gui::PercentToX(13.f, GfxSettings->Resolution), gui::PercentToY(4.0f, GfxSettings->Resolution),
+		KeyTimer, KeyTimeMax,
 		Option[FULLSCREEN][GfxSettings->Fullscreen],
 		Font, Option[FULLSCREEN].data(), static_cast<uint32>(Option[FULLSCREEN].size())
 	);
@@ -327,6 +329,7 @@ void SettingsMenu::InitGui()
 	(
 		SettingsText[FRAMERATE_LIMIT].getPosition().x + (Container.getSize().x / 12.f * 4.f), SettingsText[FRAMERATE_LIMIT].getPosition().y,
 		gui::PercentToX(13.f, GfxSettings->Resolution), gui::PercentToY(4.0f, GfxSettings->Resolution),
+		KeyTimer, KeyTimeMax,
 		defaultString,
 		Font, Option[FRAMERATE_LIMIT].data(), static_cast<uint32>(Option[FRAMERATE_LIMIT].size())
 	);
@@ -336,6 +339,7 @@ void SettingsMenu::InitGui()
 	(
 		SettingsText[VERTICAL_SYNC].getPosition().x + (Container.getSize().x / 12.f * 4.f), SettingsText[VERTICAL_SYNC].getPosition().y,
 		gui::PercentToX(13.f, GfxSettings->Resolution), gui::PercentToY(4.0f, GfxSettings->Resolution),
+		KeyTimer, KeyTimeMax,
 		Option[VERTICAL_SYNC][GfxSettings->VerticalSync],
 		Font, Option[VERTICAL_SYNC].data(), static_cast<uint32>(Option[VERTICAL_SYNC].size())
 	);

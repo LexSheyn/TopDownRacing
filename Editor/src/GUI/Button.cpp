@@ -50,21 +50,21 @@ namespace gui
 	{
 		if (Shape.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 		{
-			ButtonStatus = Status::Covered;
+			ButtonStatus = Status::COVERED;
 
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 			{
-				ButtonStatus = Status::Pressed;
+				ButtonStatus = Status::PRESSED;
 			}
 		}
 		else
 		{
-			ButtonStatus = Status::Idle;
+			ButtonStatus = Status::IDLE;
 		}
 
 		switch (ButtonStatus)
 		{
-			case Status::Idle:
+			case Status::IDLE:
 			{				
 				if (Font)
 				{					
@@ -80,7 +80,7 @@ namespace gui
 				break;
 			}			
 
-			case Status::Covered:
+			case Status::COVERED:
 			{
 				Shape.setFillColor(sf::Color(250, 50, 50));
 				
@@ -93,7 +93,7 @@ namespace gui
 				break;
 			}			
 
-			case Status::Pressed:
+			case Status::PRESSED:
 			{				
 				if (Font)
 				{
@@ -128,7 +128,7 @@ namespace gui
 
 	const bool Button::IsPressed() const
 	{
-		if (ButtonStatus == Status::Pressed)
+		if (ButtonStatus == Status::PRESSED)
 		{
 			return true;
 		}
@@ -166,7 +166,7 @@ namespace gui
 	{
 		Font = nullptr;
 
-		ButtonStatus = Status::Idle;
+		ButtonStatus = Status::IDLE;
 
 		Id = 0;
 	}

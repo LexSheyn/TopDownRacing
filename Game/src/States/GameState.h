@@ -76,7 +76,7 @@ private:
 
 	enum GameButton : uint32
 	{
-		Resume = 0, Settings, Exit, Apply, Back
+		RESUME = 0, SETTINGS, EXIT, APPLY, BACK
 	};
 
 	TileMap* Map;

@@ -8,9 +8,11 @@ namespace gui
 	DropDownList::DropDownList
 	(
 		const float x, const float y, const float width, const float height,
+		sf::Clock& keyTimer, float& keyTimeMax,
+		std::string defaultString,
 		sf::Font& font, std::string list[],
 		uint32 numberOfElements, uint32 defaultIndex
-	) : Font(font), Showed(false), KeyTimeMax(0.3f)
+	) : Font(font), Showed(false), KeyTimer(keyTimer), KeyTimeMax(keyTimeMax)
 	{
 		ActiveElement = new gui::Button
 		(
@@ -18,8 +20,15 @@ namespace gui
 			Font, list[defaultIndex]
 		);
 
+		ActiveElement->SetString(defaultString);
+
 		for (uint32 i = 0; i < numberOfElements; i++)
 		{
+			if (list[i] == defaultString)
+			{
+				ActiveElement->SetId(i);
+			}
+
 			List.push_back
 			(
 				new gui::Button
@@ -33,11 +42,12 @@ namespace gui
 
 	DropDownList::DropDownList
 	(
-		const float x, const float y, const float width, const float height, 
+		const float x, const float y, const float width, const float height,
+		sf::Clock& keyTimer, float& keyTimeMax,
 		sf::VideoMode videoMode, 
 		sf::Font& font, std::string list[], 
 		uint32 numberOfElements, uint32 defaultIndex
-	) : Font(font), Showed(false), KeyTimeMax(0.3f)
+	) : Font(font), Showed(false), KeyTimer(keyTimer), KeyTimeMax(keyTimeMax)
 	{
 		ActiveElement = new gui::Button
 		(
@@ -64,7 +74,7 @@ namespace gui
 					x, y + (static_cast<float>(i + 1u) * height), width, height,
 					Font, list[i], i
 				)
-			);
+			);			
 		}
 	}
 	
@@ -114,6 +124,11 @@ namespace gui
 					ActiveElement->SetString(element->GetString());
 					ActiveElement->SetId(element->GetId());
 				}
+			}
+
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && GetKeyTime())
+			{
+				Showed = false;
 			}
 		}
 	}
