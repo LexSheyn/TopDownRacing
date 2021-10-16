@@ -13,6 +13,7 @@ namespace gui
 		DropDownList
 		(
 			const float x, const float y, const float width, const float height,
+			std::string defaultString,
 			sf::Font& font, std::string list[],
 			uint32 numberOfElements, uint32 defaultIndex = 0
 		);

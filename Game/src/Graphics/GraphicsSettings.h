@@ -25,7 +25,7 @@ public:
 
 	uint32 Style;
 
-	uint32 FrameRateLimit;
+	uint32 FramerateLimit;
 
 	bool VerticalSync;
 

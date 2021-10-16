@@ -140,7 +140,7 @@ void Game::InitWindow()
 		GfxSettings.ContextSettings
 	);
 
-	Window->setFramerateLimit(GfxSettings.FrameRateLimit);
+	Window->setFramerateLimit(GfxSettings.FramerateLimit);
 	Window->setVerticalSyncEnabled(GfxSettings.VerticalSync);
 	Window->setMouseCursorGrabbed(GfxSettings.CursorGrabbing);
 }

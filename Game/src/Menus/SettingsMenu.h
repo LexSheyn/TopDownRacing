@@ -40,7 +40,7 @@ private:
 
 	void InitVariables();
 
-	void InitVideoModes();
+	void InitOptions();
 
 	void InitGui();
 
@@ -48,6 +48,7 @@ private:
 
 	Logger Log;
 
+	// Buttons
 	static const uint32 ButtonsAmount = 3u;
 
 	gui::Button* ButtonPtr[ButtonsAmount];
@@ -61,19 +62,27 @@ private:
 
 	enum Setting : uint32
 	{
-		Resolution = 0, Fullscreen, FramerateLimit, VerticalSync, MusicVolume, SoundVolume
+		RESOLUTION = 0, FULLSCREEN, FRAMERATE_LIMIT, VERTICAL_SYNC, MUSIC_VOLUME, SOUND_VOLUME
 	};
 
+	// Core
 	sf::RenderWindow* Window;
 
 	GraphicsSettings* GfxSettings;
 
-	sf::Text SettingsText[6];
+	// Settings
+	static const uint32 SettingsAmount = 6u;
+
+	sf::Text SettingsText[SettingsAmount];
 
 	std::map<uint32, gui::DropDownList*> SettingsList;
 
-	std::vector<sf::VideoMode> VideoMode;
-	std::vector<std::string> VideoModeString;
+	std::vector<sf::VideoMode> Resolution;
+	std::vector<int32> Fullscreen;
+	std::vector<uint32> FramerateLimit;
+	std::vector<bool> VerticalSync;
+
+	std::vector<std::string> Option[SettingsAmount];
 
 	bool Opened;
 };

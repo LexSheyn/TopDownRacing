@@ -8,6 +8,7 @@ namespace gui
 	DropDownList::DropDownList
 	(
 		const float x, const float y, const float width, const float height,
+		std::string defaultString,
 		sf::Font& font, std::string list[],
 		uint32 numberOfElements, uint32 defaultIndex
 	) : Font(font), Showed(false), KeyTimeMax(0.3f)
@@ -18,8 +19,15 @@ namespace gui
 			Font, list[defaultIndex]
 		);
 
+		ActiveElement->SetString(defaultString);
+
 		for (uint32 i = 0; i < numberOfElements; i++)
 		{
+			if (list[i] == defaultString)
+			{
+				ActiveElement->SetId(i);
+			}
+
 			List.push_back
 			(
 				new gui::Button
@@ -114,6 +122,11 @@ namespace gui
 					ActiveElement->SetString(element->GetString());
 					ActiveElement->SetId(element->GetId());
 				}
+			}
+
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && GetKeyTime())
+			{
+				Showed = false;
 			}
 		}
 	}

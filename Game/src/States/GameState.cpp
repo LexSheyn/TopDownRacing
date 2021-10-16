@@ -17,6 +17,8 @@ GameState::GameState(StateData* stateData, State* mainMenu)
 	State::InitTexture(ButtonTextures[Resume], "../Resources/Images/GUI/Buttons/resume.png");
 	State::InitTexture(ButtonTextures[Settings], "../Resources/Images/GUI/Buttons/settings.png");
 	State::InitTexture(ButtonTextures[Exit], "../Resources/Images/GUI/Buttons/exit.png");
+	State::InitTexture(ButtonTextures[Apply], "../Resources/Images/GUI/Buttons/apply.png");
+	State::InitTexture(ButtonTextures[Back], "../Resources/Images/GUI/Buttons/back.png");
 
 	InitTileMap();
 
@@ -161,6 +163,7 @@ void GameState::UpdateMenus(const sf::Vector2i& mousePosition, const float& dt)
 		else
 		{
 			MenuSettings.Close();
+			MenuSettings.ResetGui();
 		}
 	}
 	else if (MenuPause.IsButtonPressed(Exit) && GetKeyTime())
@@ -329,8 +332,8 @@ void GameState::InitMenus()
 	MenuPause.AddButton(Exit, 4, &ButtonTextures[Exit]);
 
 	// Settings menu
-	MenuSettings.AddButton(Apply, 2, &ButtonTextures[Resume]);
-	MenuSettings.AddButton(Back, 0, &ButtonTextures[Exit]);
+	MenuSettings.AddButton(Apply, 2, &ButtonTextures[Apply]);
+	MenuSettings.AddButton(Back, 0, &ButtonTextures[Back]);
 }
 
 void GameState::InitPlayers()
