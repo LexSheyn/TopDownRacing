@@ -29,7 +29,8 @@ Player::Player(sf::Texture& texture, const float x, const float y)
 
 Player::~Player()
 {
-	//
+	// Deleting collider
+	delete PlayerCollider;
 }
 
 
@@ -42,7 +43,18 @@ void Player::PlayAnimation(const int32& index, const float& dt, const bool prior
 
 void Player::UpdateAnimations(const float& dt)
 {
-	//
+	if (Engine->CheckStatus(EngineComponent::Status::Idle))
+	{
+		std::cout << "IDLE" << std::endl;
+
+		Animations->Play(IDLE, dt);
+	}
+	else if (Engine->CheckStatus(EngineComponent::Status::Driving))
+	{
+		std::cout << "DRIVING" << std::endl;
+
+		Animations->Play(DRIVING, dt);
+	}
 }
 
 void Player::Update(const float& dt, sf::Vector2f& mousePositionView)
@@ -87,6 +99,6 @@ void Player::InitVariables()
 
 void Player::InitAnimations()
 {
-	Animations->AddAnimation(IDLE,    10.f, 00, 00, 05, 00, 64.f, 64.f);
-	Animations->AddAnimation(DRIVING, 10.f, 00, 01, 05, 01, 64.f, 64.f);
+	Animations->AddAnimation(IDLE,    10.f, 00, 00, 03, 00, 64, 64);
+	Animations->AddAnimation(DRIVING, 10.f, 00, 01, 03, 01, 64, 64);
 }

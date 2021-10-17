@@ -71,20 +71,20 @@ const bool EngineComponent::CheckStatus(Status status) const
 		{
 			if (Velocity.x == 0.f && Velocity.y == 0.f)
 			{
-				return true;
-
-				break;
+				return true;				
 			}
+
+			break;
 		}
 
 		case Status::Driving:
 		{
 			if (Velocity.x != 0.f || Velocity.y != 0.f)
 			{
-				return true;
-
-				break;
+				return true;				
 			}
+
+			break;
 		}
 	}
 

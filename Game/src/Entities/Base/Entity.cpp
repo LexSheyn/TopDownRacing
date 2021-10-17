@@ -171,7 +171,8 @@ const bool Entity::IsDead() const
 
 void Entity::SetTexture(sf::Texture& texture)
 {
-	Sprite.setTexture(texture);	
+	Sprite.setTexture(texture);
+	Sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
 }
 
 void Entity::SetOriginToCenter()
