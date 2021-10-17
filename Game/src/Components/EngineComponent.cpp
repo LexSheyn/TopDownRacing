@@ -185,6 +185,45 @@ const sf::Vector2f& EngineComponent::GetVelocity() const
 	return Velocity;
 }
 
+const sf::Vector2f& EngineComponent::GetVelocityMax() const
+{
+	// To do...
+
+	return Velocity;
+}
+
+const float EngineComponent::GetVelocityLength() const
+{
+	return static_cast<float>(std::sqrt(std::pow(Velocity.x, 2) + std::pow(Velocity.y, 2)));
+}
+
+const float EngineComponent::GetVelocityLengthMax()
+{
+	sf::Vector2f velocity;
+
+	// X
+	if (Velocity.x > 0.f)
+	{
+		velocity.x = SpeedMax;
+	}
+	else if (Velocity.x < 0.f)
+	{
+		velocity.x = -SpeedMax;
+	}
+
+	// Y
+	if (Velocity.y > 0.f)
+	{
+		velocity.y = SpeedMax;
+	}
+	else if (Velocity.y < 0.f)
+	{
+		velocity.y = -SpeedMax;
+	}
+
+	return static_cast<float>(std::sqrt(std::pow(velocity.x, 2) + std::pow(velocity.y, 2)));
+}
+
 
 // Private Functions:
 

@@ -5,7 +5,7 @@ GameState::GameState(StateData* stateData, State* mainMenu)
 	: State(stateData), MainMenuPtr(mainMenu), Log(typeid(*this).name()),
 	MenuPause(StData->GfxSettings->Resolution, Font),
 	MenuSettings(StData->Window, StData->GfxSettings, Font, KeyTimer, KeyTimeMax), 
-	HpBar(10.f, 10.f, 200.f, 24.f)
+	SpeedBar(10.f, 10.f, 200.f, 24.f)
 {
 	InitDefferedRenderer();
 
@@ -137,10 +137,11 @@ void GameState::UpdatePlayerInput(const float& dt)
 
 void GameState::UpdatePlayerGui(const float& dt)
 {
-	HpBar.Update
+	// TEST
+	SpeedBar.Update
 	(
-		static_cast<int32>(std::sqrt(std::pow(PlayerOne->GetEngineComponent()->GetVelocity().x, 2) + std::pow(PlayerOne->GetEngineComponent()->GetVelocity().y, 2)) * dt),
-		10,
+		static_cast<int32>(PlayerOne->GetEngineComponent()->GetVelocityLength()),
+		static_cast<int32>(PlayerOne->GetEngineComponent()->GetVelocityLengthMax()),
 		dt
 	);
 }
@@ -263,7 +264,7 @@ void GameState::Render(sf::RenderTarget* target)
 	PlayerOne->Render(&RenderTexture, false);
 
 	RenderTexture.setView(Window->getDefaultView());
-	HpBar.Render(&RenderTexture);
+	SpeedBar.Render(&RenderTexture);
 
 	// Pause menu
 	if (State::IsPaused())
@@ -350,7 +351,7 @@ void GameState::InitPlayers()
 
 void GameState::InitPlayerGui()
 {
-	HpBar.SetFont(Font);
+//	SpeedBar.SetFont(Font);
 }
 
 void GameState::InitSystems()

@@ -72,7 +72,7 @@ private:
 
 	SettingsMenu MenuSettings;
 
-	gui::ProgressBar HpBar;
+	gui::ProgressBar SpeedBar;
 
 	enum GameButton : uint32
 	{

@@ -47,6 +47,12 @@ public:
 
 	const sf::Vector2f& GetVelocity() const;
 
+	const sf::Vector2f& GetVelocityMax() const;
+
+	const float GetVelocityLength() const;
+
+	const float GetVelocityLengthMax();
+
 private:
 
 // Private Functions:

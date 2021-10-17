@@ -141,7 +141,7 @@ const sf::FloatRect Entity::GetNextPositionBounds(const float& dt) const
 	return sf::FloatRect();
 }
 
-const EngineComponent* Entity::GetEngineComponent() const
+EngineComponent* Entity::GetEngineComponent() const
 {
 	return Engine;
 }

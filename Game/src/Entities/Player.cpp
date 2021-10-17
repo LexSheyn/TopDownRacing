@@ -45,15 +45,12 @@ void Player::UpdateAnimations(const float& dt)
 {
 	if (Engine->CheckStatus(EngineComponent::Status::Idle))
 	{
-		std::cout << "IDLE" << std::endl;
-
 		Animations->Play(IDLE, dt);
 	}
 	else if (Engine->CheckStatus(EngineComponent::Status::Driving))
 	{
-		std::cout << "DRIVING" << std::endl;
-
-		Animations->Play(DRIVING, dt);
+		// TEST
+		Animations->Play(DRIVING,  Engine->GetVelocityLength(), Engine->GetVelocityLengthMax(), dt);
 	}
 }
 
@@ -99,6 +96,6 @@ void Player::InitVariables()
 
 void Player::InitAnimations()
 {
-	Animations->AddAnimation(IDLE,    10.f, 00, 00, 03, 00, 64, 64);
-	Animations->AddAnimation(DRIVING, 10.f, 00, 01, 03, 01, 64, 64);
+	Animations->AddAnimation(IDLE,    15.f, 00, 00, 03, 00, 64, 64);
+	Animations->AddAnimation(DRIVING, 05.f, 00, 01, 03, 01, 64, 64);
 }
