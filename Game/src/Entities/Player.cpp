@@ -18,6 +18,8 @@ Player::Player(sf::Texture& texture, const float x, const float y)
 
 	Entity::CreateAttributeComponent(100);
 
+	Entity::CreateAnimationComponent(texture);
+
 	Entity::SetPosition(x, y);
 
 	InitAnimations();
@@ -33,8 +35,9 @@ Player::~Player()
 
 // Functions:
 
-void Player::PlayAnimation()
+void Player::PlayAnimation(const int32& index, const float& dt, const bool priority)
 {
+	Animations->Play(index, dt, priority);
 }
 
 void Player::UpdateAnimations(const float& dt)
@@ -44,8 +47,6 @@ void Player::UpdateAnimations(const float& dt)
 
 void Player::Update(const float& dt, sf::Vector2f& mousePositionView)
 {
-//	Movement->Update(dt);
-
 	Engine->Update(dt);
 
 	Hitbox->Update();
@@ -55,7 +56,7 @@ void Player::Update(const float& dt, sf::Vector2f& mousePositionView)
 
 void Player::Render(sf::RenderTarget* target, const bool showHitbox)
 {
-	target->draw(EntitySprite);
+	target->draw(Sprite);
 
 	if (showHitbox)
 	{
@@ -68,7 +69,7 @@ void Player::Render(sf::RenderTarget* target, const bool showHitbox)
 
 const float Player::GetRotation() const
 {
-	return EntitySprite.getRotation();
+	return Sprite.getRotation();
 }
 
 Collider& Player::GetCollider() const
@@ -86,5 +87,6 @@ void Player::InitVariables()
 
 void Player::InitAnimations()
 {
-	//
+	Animations->AddAnimation(IDLE,    10.f, 00, 00, 05, 00, 64.f, 64.f);
+	Animations->AddAnimation(DRIVING, 10.f, 00, 01, 05, 01, 64.f, 64.f);
 }

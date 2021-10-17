@@ -2,14 +2,16 @@
 
 #include "Base/Component.h"
 
-enum class EngineStatus : int32
-{
-	Idle = 0, Driving
-};
-
 class EngineComponent : public Component
 {
 public:
+
+// Statuses
+
+	enum class Status : int32
+	{
+		Idle = 0, Driving
+	};
 
 // Concstructors and Destructor:
 
@@ -33,7 +35,7 @@ public:
 
 	void InvertVelocityY();
 
-	const bool CheckStatus(EngineStatus status) const;
+	const bool CheckStatus(Status status) const;
 
 	void Update(const float& dt);
 
@@ -53,7 +55,7 @@ private:
 
 // Variables:
 
-	sf::Sprite& EntitySprite;
+	sf::Sprite& Sprite;
 
 	sf::RectangleShape& Hitbox;
 

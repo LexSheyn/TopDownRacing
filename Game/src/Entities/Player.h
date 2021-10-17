@@ -14,7 +14,7 @@ public:
 
 // Functions:
 
-	void PlayAnimation(); // To do...
+	void PlayAnimation(const int32& index, const float& dt, const bool priority = false);
 
 	void UpdateAnimations(const float& dt);
 
@@ -38,6 +38,13 @@ private:
 
 // Variables:
 
+	// Collision
 	Collider* PlayerCollider;
+
+	// Animations
+	enum AnimationCode : int32
+	{
+		IDLE = 0, DRIVING
+	};
 };
 

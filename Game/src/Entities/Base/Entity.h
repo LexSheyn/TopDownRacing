@@ -87,7 +87,7 @@ public:
 
 protected:
 
-	sf::Sprite EntitySprite;
+	sf::Sprite Sprite;
 
 	// Components
 	HitboxComponent* Hitbox;

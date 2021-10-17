@@ -4,7 +4,7 @@
 // Constructors and Destructor:
 
 EngineComponent::EngineComponent(sf::Sprite& sprite, sf::RectangleShape& hitbox, const float speedMax, const float boostMax, const float deceleration)
-	: EntitySprite(sprite), Hitbox(hitbox), Pi(3.141592f)
+	: Sprite(sprite), Hitbox(hitbox), Pi(3.141592f)
 {
 	InitVariables();
 
@@ -28,24 +28,24 @@ void EngineComponent::Drive(const float& dt)
 {
 	Boost = BoostMax * dt;
 
-	Angle = EntitySprite.getRotation();
+	Angle = Sprite.getRotation();
 }
 
 void EngineComponent::Reverse(const float& dt)
 {
 	Boost = -BoostMax * dt;
 
-	Angle = EntitySprite.getRotation();
+	Angle = Sprite.getRotation();
 }
 
 void EngineComponent::TurnLeft(const float& dt)
 {
-	EntitySprite.rotate(-100.f * dt);
+	Sprite.rotate(-100.f * dt);
 }
 
 void EngineComponent::TurnRight(const float& dt)
 {
-	EntitySprite.rotate(100.f * dt);
+	Sprite.rotate(100.f * dt);
 }
 
 void EngineComponent::InvertVelocity()
@@ -63,11 +63,11 @@ void EngineComponent::InvertVelocityY()
 	Velocity.y = -Velocity.y / 3.f;
 }
 
-const bool EngineComponent::CheckStatus(EngineStatus status) const
+const bool EngineComponent::CheckStatus(Status status) const
 {
 	switch (status)
 	{
-		case EngineStatus::Idle:
+		case Status::Idle:
 		{
 			if (Velocity.x == 0.f && Velocity.y == 0.f)
 			{
@@ -77,7 +77,7 @@ const bool EngineComponent::CheckStatus(EngineStatus status) const
 			}
 		}
 
-		case EngineStatus::Driving:
+		case Status::Driving:
 		{
 			if (Velocity.x != 0.f || Velocity.y != 0.f)
 			{
@@ -94,7 +94,7 @@ const bool EngineComponent::CheckStatus(EngineStatus status) const
 void EngineComponent::Update(const float& dt)
 {
 	// Acceleration calculation
-	Acceleration.x = std::sin(Angle * Pi / 180.f) * Boost;
+	Acceleration.x =  std::sin(Angle * Pi / 180.f) * Boost;
 	Acceleration.y = -std::cos(Angle * Pi / 180.f) * Boost;
 
 	// Velocity calculation

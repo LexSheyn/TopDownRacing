@@ -4,7 +4,7 @@
 // Constructors and Destructor:
 
 HitboxComponent::HitboxComponent(sf::Sprite& sprite, const float width, const float height)
-	: EntitySprite(sprite)
+	: Sprite(sprite)
 {
 	NextPosition.left = 0.f;
 	NextPosition.top = 0.f;
@@ -13,7 +13,7 @@ HitboxComponent::HitboxComponent(sf::Sprite& sprite, const float width, const fl
 
 	Hitbox.setSize(sf::Vector2f(width, height));
 	Hitbox.setOrigin(Hitbox.getSize() / 2.f);
-	Hitbox.setPosition(EntitySprite.getPosition());
+	Hitbox.setPosition(Sprite.getPosition());
 	Hitbox.setFillColor(sf::Color::Transparent);
 	Hitbox.setOutlineThickness(-1.f);
 	Hitbox.setOutlineColor(sf::Color::Green);
@@ -33,8 +33,7 @@ bool HitboxComponent::Intersects(const sf::FloatRect& rect)
 
 void HitboxComponent::Update()
 {
-//	Hitbox.setPosition(EntitySprite.getPosition());
-	EntitySprite.setPosition(Hitbox.getPosition());
+	Sprite.setPosition(Hitbox.getPosition());
 }
 
 void HitboxComponent::Render(sf::RenderTarget* target, const bool visible)
@@ -66,7 +65,8 @@ const sf::FloatRect HitboxComponent::GetGlobalBounds() const
 const sf::FloatRect& HitboxComponent::GetNextPosition(const sf::Vector2f& velocity)
 {
 	NextPosition.left = Hitbox.getPosition().x + velocity.x;
-	NextPosition.top = Hitbox.getPosition().y + velocity.y;
+
+	NextPosition.top =  Hitbox.getPosition().y + velocity.y;
 
 	return NextPosition;
 }
@@ -78,5 +78,5 @@ void HitboxComponent::SetPosition(const float x, const float y)
 {
 	Hitbox.setPosition(x, y);
 
-	EntitySprite.setPosition(x, y);
+	Sprite.setPosition(x, y);
 }

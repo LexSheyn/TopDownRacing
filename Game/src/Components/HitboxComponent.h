@@ -38,7 +38,7 @@ private:
 
 // Variables:
 
-	sf::Sprite& EntitySprite;
+	sf::Sprite& Sprite;
 	sf::RectangleShape Hitbox;
 	sf::FloatRect NextPosition;
 };

@@ -95,7 +95,7 @@ const sf::Vector2f Entity::GetPosition() const
 		return Hitbox->GetPosition();
 	}
 
-	return EntitySprite.getPosition();
+	return Sprite.getPosition();
 }
 
 const sf::Vector2i Entity::GetPositionGrid(const int32 gridSizeI) const
@@ -111,8 +111,8 @@ const sf::Vector2i Entity::GetPositionGrid(const int32 gridSizeI) const
 
 	return sf::Vector2i
 	(
-		static_cast<int32>(EntitySprite.getPosition().x / gridSizeI),
-		static_cast<int32>(EntitySprite.getPosition().y / gridSizeI)
+		static_cast<int32>(Sprite.getPosition().x / gridSizeI),
+		static_cast<int32>(Sprite.getPosition().y / gridSizeI)
 	);
 }
 
@@ -123,7 +123,7 @@ const sf::FloatRect Entity::GetGlobalBounds() const
 		return Hitbox->GetGlobalBounds();
 	}
 
-	return EntitySprite.getGlobalBounds();
+	return Sprite.getGlobalBounds();
 }
 
 const sf::FloatRect Entity::GetNextPositionBounds(const float& dt) const
@@ -171,12 +171,12 @@ const bool Entity::IsDead() const
 
 void Entity::SetTexture(sf::Texture& texture)
 {
-	EntitySprite.setTexture(texture);	
+	Sprite.setTexture(texture);	
 }
 
 void Entity::SetOriginToCenter()
 {
-	EntitySprite.setOrigin(EntitySprite.getPosition() + sf::Vector2f(EntitySprite.getGlobalBounds().width / 2.f, EntitySprite.getGlobalBounds().height / 2.f));
+	Sprite.setOrigin(Sprite.getPosition() + sf::Vector2f(Sprite.getGlobalBounds().width / 2.f, Sprite.getGlobalBounds().height / 2.f));
 }
 
 void Entity::SetPosition(const float x, const float y)
@@ -187,7 +187,7 @@ void Entity::SetPosition(const float x, const float y)
 	}
 	else
 	{
-		EntitySprite.setPosition(x, y);
+		Sprite.setPosition(x, y);
 	}
 }
 
@@ -217,22 +217,22 @@ void Entity::LoseHp(const int32 hp)
 
 void Entity::CreateHitboxComponent(const float width, const float height)
 {
-	Hitbox = new HitboxComponent(EntitySprite, width, height);
+	Hitbox = new HitboxComponent(Sprite, width, height);
 }
 
 void Entity::CreateMovementComponent(const float velocityMax, const float acceleration, const float deceleration)
 {
-	Movement = new MovementComponent(EntitySprite, velocityMax, acceleration, deceleration);
+	Movement = new MovementComponent(Sprite, velocityMax, acceleration, deceleration);
 }
 
 void Entity::CreateEngineComponent(HitboxComponent* hitbox, const float speedMax, const float boostMax, const float deceleration)
 {
-	Engine = new EngineComponent(EntitySprite, hitbox->GetHitbox(), speedMax, boostMax, deceleration);
+	Engine = new EngineComponent(Sprite, hitbox->GetHitbox(), speedMax, boostMax, deceleration);
 }
 
 void Entity::CreateAnimationComponent(sf::Texture& textureSheet)
 {
-	Animations = new AnimationComponent(EntitySprite, textureSheet);
+	Animations = new AnimationComponent(Sprite, textureSheet);
 }
 
 void Entity::CreateAttributeComponent(const int32 hpMax)
