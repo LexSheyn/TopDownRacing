@@ -96,6 +96,6 @@ void Player::InitVariables()
 
 void Player::InitAnimations()
 {
-	Animations->AddAnimation(IDLE,    15.f, 00, 00, 03, 00, 64, 64);
-	Animations->AddAnimation(DRIVING, 05.f, 00, 01, 03, 01, 64, 64);
+	Animations->AddAnimation(IDLE,    15.f, 00, 00, 05, 00, 64, 64);
+	Animations->AddAnimation(DRIVING, 05.f, 00, 01, 05, 01, 64, 64);
 }
